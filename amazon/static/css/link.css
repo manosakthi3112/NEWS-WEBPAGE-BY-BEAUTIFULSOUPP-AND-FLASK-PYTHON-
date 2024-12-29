@@ -1,0 +1,46 @@
+.tot{
+	border: solid;
+	justify-content: center;
+	align-items: center;
+	padding: 20px;
+	border-radius: 25px;
+	margin: 50px;
+}
+img{
+	position: relative;
+	left: 25%;
+	border-radius: 20px;
+	width: 40vw;
+}
+p{
+	padding: 30px;
+	font-size: 1.5em;
+}
+body{
+	font-family: "Kavivanar", serif;
+  	font-weight: 400;
+ 	font-style: normal;
+}
+header{
+    display: flex;
+    flex-direction: row;
+    height: 70px;
+    position: sticky;
+    top: 0;
+    padding: 20px;
+    column-gap: 70px;
+    justify-content: space-between;
+    align-items: center;
+    background-color: gold;
+}
+.logo{
+    border: none !important;
+    width:50px ;
+    height: 50px;
+}
+.logo_{
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    column-gap: 10px;
+}

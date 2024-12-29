@@ -1,0 +1,11 @@
+
+body{
+    display: flex;
+    padding:200px;
+    justify-content: center; 
+    align-items: center;    
+    background-color: whitesmoke;
+    border-radius: 20px;
+    text-align: center;   
+    font-size: 1.3em;
+}

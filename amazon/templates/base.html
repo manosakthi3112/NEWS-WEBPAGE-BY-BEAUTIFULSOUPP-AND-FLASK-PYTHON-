@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+        <link rel="preconnect" href="https://fonts.googleapis.com">
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link href="https://fonts.googleapis.com/css2?family=Atma:wght@300;400;500;600;700&family=Caveat:wght@700&family=Coiny&display=swap" rel="stylesheet">
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="icon" href="{{ url_for('static', filename='img/logo.png') }}" type="image/x-icon">
+        <title>JUNGLANS NEWS</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+        <link rel="stylesheet" href="{{ url_for('static', filename='css/base.css') }}">
+    </head>
+    <body>
+        <header>
+            <div class="logo_">
+                <img class="logo" src="static/img/logo.png">
+                <a href="/">
+                    <h2>JUNGLANS NEWS</h2>
+                </a>
+            </div>
+            <div class="link">
+                <a href="/more/trending">TRENDING</a>
+                <a href="">TAMILNADU</a>
+                <a href="">CINEMA</a>
+                <a href="">LIFESTYLE</a>
+                <a href="">SPORTS</a>
+                <a href="">INDIA</a>
+                <a href="">WORLD</a>
+            </div>
+        </header>
+        {% if data %}
+        <div class="tot_div">
+            <h1>TRENDING NEWS</h1>
+                <div class="tot">
+                    {% for i in range(6) %}
+                        <div class="text">
+                            <div class="text-container">
+                                <form action="/link" method="POST">
+                                       <img src="{{data[i].img_link}}">
+                                        <p>{{ data[i].text }}</p>
+                                        <button type="submit">READ MORE</button>
+                                        <input type="hidden" name="fname" value="{{data[i].href}}">
+                                        <input type="hidden" name="jname" value="{{data[i].img_link}}">
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+        </div>
+        {% endif %}
+        {% if tamilnadu %}
+        <div class="tot_div">
+            <h1>TAMILNADU NEWS</h1>
+                <div class="tot">
+                    {% for i in range(6) %}
+                        <div class="text">
+                            <div class="text-container">
+                                <form action="/link" method="POST">
+                                       <img src="{{tamilnadu[i].img_link}}">
+                                        <p>{{ tamilnadu[i].text }}</p>
+                                        <button type="submit">READ MORE</button>
+                                        <input type="hidden" name="fname" value="{{tamilnadu[i].href}}">
+                                        <input type="hidden" name="jname" value="{{tamilnadu[i].img_link}}">
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+        </div>
+        {% endif %}
+        <div class="tot_div">
+            <h1>CINEMA NEWS</h1>
+            {% if cinema %}
+                <div class="tot">
+                    {% for i in range(6) %}
+                        <div class="text">
+                            <div class="text-container">
+                                <form action="/link" method="POST">
+                                       <img src="{{cinema[i].img_link}}">
+                                        <p>{{ cinema[i].text }}</p>
+                                        <button type="submit">READ MORE</button>
+                                        <input type="hidden" name="fname" value="{{cinema[i].href}}">
+                                        <input type="hidden" name="jname" value="{{cinema[i].img_link}}">
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="tot_div">
+            <h1>LIFESTYLE NEWS</h1>
+            {% if lifestyle %}
+                <div class="tot">
+                    {% for i in range(6) %}
+                        <div class="text">
+                            <div class="text-container">
+                                <form action="/link" method="POST">
+                                       <img src="{{lifestyle[i].img_link}}">
+                                        <p>{{ lifestyle[i].text }}</p>
+                                        <button type="submit">READ MORE</button>
+                                        <input type="hidden" name="fname" value="{{lifestyle[i].href}}">
+                                        <input type="hidden" name="jname" value="{{lifestyle[i].img_link}}">
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="tot_div">
+            <h1>SPORTS NEWS</h1>
+            {% if sports %}
+                <div class="tot">
+                    {% for i in range(6) %}
+                        <div class="text">
+                            <div class="text-container">
+                                <form action="/link" method="POST">
+                                       <img src="{{sports[i].img_link}}">
+                                        <p>{{ sports[i].text }}</p>
+                                        <button type="submit">READ MORE</button>
+                                        <input type="hidden" name="fname" value="{{sports[i].href}}">
+                                        <input type="hidden" name="jname" value="{{sports[i].img_link}}">
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+         <div class="tot_div">
+            <h1>BUSINESS NEWS</h1>
+            {% if business %}
+                <div class="tot">
+                    {% for i in range(6) %}
+                        <div class="text">
+                            <div class="text-container">
+                                <form action="/link" method="POST">
+                                       <img src="{{business[i].img_link}}">
+                                        <p>{{ business[i].text }}</p>
+                                        <button type="submit">READ MORE</button>
+                                        <input type="hidden" name="fname" value="{{business[i].href}}">
+                                        <input type="hidden" name="jname" value="{{business[i].img_link}}">
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+         <div class="tot_div">
+            <h1>INDIA NEWS</h1>
+            {% if india %}
+                <div class="tot">
+                    {% for i in range(6) %}
+                        <div class="text">
+                            <div class="text-container">
+                                <form action="/link" method="POST">
+                                       <img src="{{india[i].img_link}}">
+                                        <p>{{ india[i].text }}</p>
+                                        <button type="submit">READ MORE</button>
+                                        <input type="hidden" name="fname" value="{{india[i].href}}">
+                                        <input type="hidden" name="jname" value="{{india[i].img_link}}">
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+         <div class="tot_div">
+            <h1>WORLD NEWS</h1>
+            {% if world %}
+                <div class="tot">
+                    {% for i in range(6) %}
+                        <div class="text">
+                            <div class="text-container">
+                                <form action="/link" method="POST">
+                                       <img src="{{world[i].img_link}}">
+                                        <p>{{ world[i].text }}</p>
+                                        <button type="submit">READ MORE</button>
+                                        <input type="hidden" name="fname" value="{{world[i].href}}">
+                                        <input type="hidden" name="jname" value="{{world[i].img_link}}">
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+        <div class="tot_div">
+            <h1>SPIRITUAL NEWS</h1>
+            {% if spiritual %}
+                <div class="tot">
+                    {% for i in range(6) %}
+                        <div class="text">
+                            <div class="text-container">
+                                <form action="/link" method="POST">
+                                       <img src="{{spiritual[i].img_link}}">
+                                        <p>{{ spiritual[i].text }}</p>
+                                        <button type="submit">READ MORE</button>
+                                        <input type="hidden" name="fname" value="{{spiritual[i].href}}">
+                                        <input type="hidden" name="jname" value="{{spiritual[i].img_link}}">
+                                </form>
+                            </div>
+                        </div>
+                    {% endfor %}
+                </div>
+            {% endif %}
+        </div>
+    </body>
+</html>
