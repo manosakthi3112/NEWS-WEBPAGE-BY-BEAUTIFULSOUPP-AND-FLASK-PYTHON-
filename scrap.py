@@ -1,6 +1,5 @@
 from bs4 import BeautifulSoup
 import requests
-from selenium import webdriver
 import html
 import re
 import base64
@@ -15,12 +14,10 @@ def tot():
     # Use lambda to match both dynamic jsx class and cn-left
     table = soup.find('div', class_=lambda c: c and 'cn-left' in c and 'jsx-' in c)
     if not table:
-        print("Main div not found.")
         return d
 
     _rt = table.find('ul', class_=lambda c: c and 'cn-videoList' in c and 'jsx-' in c)
     if not _rt:
-        print("Video list UL not found.")
         return d
 
     list_ = _rt.find_all('li')
@@ -66,8 +63,6 @@ def cinema_1(href):
         s=""
         for i in cinema_1_para:
             s+=i.text+"\n"
-        print(s
-              )
         f['para']=s
         return f
     except:
@@ -125,10 +120,10 @@ def tamilnadu():
 
     s=[]
     tn_table=tn_soup.find('div',class_=re.compile(r'^jsx-.*\scn-left$'))
-    print(tn_table)
+
     tn_=tn_table.find('ul',class_=re.compile(r'jsx-[\w\d]+ cn-videoList'))
     tn_list=tn_.find_all('li')
-    print(len(tn_list))
+
     for  i in tn_list:
         data={}
         data['text']=i.text
