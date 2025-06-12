@@ -1,0 +1,183 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;500&display=swap'); /* For metadata */
+
+:root {
+    /* Fonts */
+    --font-article-heading: 'Kavivanar', cursive;
+    --font-article-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol"; /* System UI fonts */
+    --font-article-meta: 'Roboto Mono', monospace;
+
+    /* Immersive Dark Theme Colors (similar to previous "Nebula" theme) */
+    --bg-abyss: #05080A;
+    --bg-void: #0D1117;
+    --bg-surface-article: #10161D; /* Slightly distinct background for the article content area */
+
+    --text-high-contrast: #F0F6FC;
+    --text-primary: #D0D8E0;       /* Slightly brighter for better readability */
+    --text-secondary: #8B949E;
+    --text-meta: #707880;          /* Slightly brighter meta text */
+
+    --accent-nebula: #00BFFF; /* Deep Sky Blue */
+    --accent-nebula-glow: rgba(0, 191, 255, 0.25);
+    --accent-nebula-shadow: rgba(0, 191, 255, 0.1);
+
+    --border-subtle: #21262D;
+    --border-interactive: #30363D;
+}
+
+@keyframes subtleGradientShiftArticle {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+html {
+    font-size: 100%; /* Base for rem units, typically 16px */
+}
+
+body {
+    font-family: var(--font-article-body);
+    background-color: var(--bg-void);
+    background-image: linear-gradient(145deg, var(--bg-abyss) 0%, var(--bg-void) 30%, var(--bg-abyss) 100%);
+    background-size: 300% 300%;
+    animation: subtleGradientShiftArticle 30s ease infinite;
+    color: var(--text-primary);
+    line-height: 1.75; /* Slightly increased base line-height */
+    padding-top: 1.25rem; /* 20px */
+    padding-bottom: 2.5rem; /* 40px */
+    font-size: 1rem; /* Base body font size */
+}
+
+/* Override Bootstrap 3 container for custom width/padding if needed */
+.container { /* Bootstrap uses .container */
+    /* You might want to override Bootstrap's container width here if needed */
+}
+
+.tot { /* This is your main article container */
+    background-color: var(--bg-surface-article);
+    max-width: 53.125rem; /* 850px */
+    margin: 1.875rem auto; /* 30px */
+    padding: 1.875rem 2.5rem 3.125rem 2.5rem; /* 30px 40px 50px 40px */
+    border-radius: 0.625rem; /* 10px */
+    border: 1px solid var(--border-interactive);
+    box-shadow: 0 0.625rem 1.875rem rgba(0,0,0,0.5), 0 0 1.5625rem var(--accent-nebula-shadow); /* 10px 30px, 0 0 25px */
+    position: relative;
+    overflow: hidden; /* For pseudo elements */
+}
+
+/* Optional: Subtle accent line at the top of the article container */
+.tot::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 0.25rem; /* 4px */
+    background: linear-gradient(to right, var(--accent-nebula), transparent);
+}
+
+
+.tot h1 {
+    font-family: var(--font-article-heading);
+    color: var(--text-high-contrast);
+    font-size: 2.25rem; /* Kavivanar (was 3rem) - slightly larger */
+    font-weight: normal;
+    margin-bottom: 0.25em;
+    line-height: 1.2;
+    text-align: center;
+    text-shadow: 0 0 0.9375rem var(--accent-nebula-glow); /* 15px */
+    padding-bottom: 0.3em;
+    border-bottom: 1px solid var(--border-subtle);
+    margin-top: 0;
+}
+
+.tot h4 { /* Sub-heading */
+    font-family: var(--font-article-body);
+    font-weight: 400;
+    color: var(--text-secondary);
+    font-size: 1.4rem; /* INCREASED (was 1.3rem) */
+    text-align: center;
+    margin-top: 0.75em; /* Adjusted margin */
+    margin-bottom: 1.75em; /* Adjusted margin */
+    line-height: 1.45; /* Adjusted */
+}
+
+.tot h3 { /* Last updated */
+    font-family: var(--font-article-meta);
+    color: var(--text-meta);
+    font-size: 0.9rem; /* INCREASED (was 0.85rem) */
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 2.8em; /* Adjusted */
+    text-transform: uppercase;
+    letter-spacing: 0.03125rem; /* 0.5px */
+}
+.tot h3::before {
+    content: "STATUS // LAST SYNC: ";
+    opacity: 0.7;
+}
+
+.tot img {
+    display: block;
+    max-width: 100%;
+    height: auto;
+    margin: 0 auto 2.8em auto; /* Adjusted */
+    border-radius: 0.5rem; /* 8px */
+    border: 1px solid var(--border-interactive);
+    box-shadow: 0 0.3125rem 0.9375rem rgba(0,0,0,0.3); /* 5px 15px */
+    transition: transform 0.4s ease-out, box-shadow 0.4s ease-out;
+}
+.tot img:hover {
+    transform: scale(1.03);
+    box-shadow: 0 0.5rem 1.5625rem rgba(0,0,0,0.4), 0 0 1.25rem var(--accent-nebula-shadow); /* 8px 25px, 0 0 20px */
+}
+
+.tot p { /* PARAGRAPH TEXT */
+    font-family: var(--font-article-body);
+    font-size: 1.25rem; /* INCREASED (was 1.1rem) - Approx 20px if 1rem=16px */
+    line-height: 1.85;  /* INCREASED (was 1.8) for better readability with larger font */
+    color: var(--text-primary);
+    margin-bottom: 1.6em; /* Adjusted */
+    text-align: justify;
+    hyphens: auto;
+}
+
+.tot p::first-letter { /* Optional: Drop cap */
+    font-size: 3.2em; /* Adjusted relative to new p font-size */
+    font-weight: 500;
+    color: var(--accent-nebula);
+    float: left;
+    line-height: 0.8;
+    margin-right: 0.07em;
+    margin-top: 0.05em;
+    text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+
+/* Responsive adjustments for smaller screens */
+@media (max-width: 48rem) { /* 768px Bootstrap 3's sm breakpoint */
+    html {
+        font-size: 93.75%; /* Base font size becomes 15px for smaller screens */
+    }
+    body {
+        padding-top: 0.625rem; /* 10px */
+        padding-bottom: 1.25rem; /* 20px */
+    }
+    .tot {
+        margin: 0.9375rem 0.625rem; /* 15px 10px */
+        padding: 1.25rem; /* 20px */
+    }
+    .tot h1 {
+        font-size: 2.5rem; /* Kavivanar (was 2.2rem) */
+    }
+    .tot h4 {
+        font-size: 1.25rem; /* INCREASED (was 1.1rem) */
+    }
+    .tot p { /* PARAGRAPH TEXT ON SMALLER SCREENS */
+        font-size: 1.125rem; /* INCREASED (was 1rem) - Approx 18px (if root is 16px) or 17px (if root is 15px) */
+        line-height: 1.8; /* Adjusted */
+        text-align: left;
+    }
+    .tot p::first-letter {
+        font-size: 2.8em; /* Adjusted relative to new p font-size */
+    }
+}

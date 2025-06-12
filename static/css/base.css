@@ -1,0 +1,267 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Roboto+Mono:wght@400;500&display=swap');
+
+:root {
+    --font-primary: 'Inter', sans-serif;
+    --font-monospace: 'Roboto Mono', monospace;
+
+    --bg-abyss: #05080A; /* Even deeper black */
+    --bg-void: #0D1117; /* Dark charcoal, for primary surfaces */
+    --bg-surface-raised: #161B22; /* Slightly lighter for raised elements like cards */
+    --bg-interactive-hover: rgba(0, 191, 255, 0.08); /* Accent hover overlay */
+
+    --text-high-contrast: #F0F6FC; /* Very bright, for titles */
+    --text-primary: #C9D1D9;       /* Main readable text */
+    --text-secondary: #8B949E;     /* Muted for less important info */
+
+    --accent-nebula: #00BFFF; /* Deep Sky Blue / Brighter Cyan */
+    --accent-nebula-glow: rgba(0, 191, 255, 0.25);
+    --accent-nebula-shadow: rgba(0, 191, 255, 0.1);
+
+    --border-subtle: #21262D;
+    --border-interactive: #30363D;
+    --border-focus: var(--accent-nebula);
+
+    --header-height: 70px;
+    --border-radius-main: 8px;
+    --border-radius-small: 5px;
+
+    --transition-fast: 0.2s ease-out;
+    --transition-medium: 0.3s ease-out;
+    --transition-slow: 0.5s ease-out;
+}
+
+@keyframes subtleGradientShift {
+    0% { background-position: 0% 50%; }
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+body {
+    font-family: var(--font-primary);
+    background-color: var(--bg-void); /* Base color */
+    /* Subtle animated gradient background for depth */
+    background-image: linear-gradient(135deg, var(--bg-abyss) 0%, var(--bg-void) 25%, var(--bg-abyss) 100%);
+    background-size: 400% 400%;
+    animation: subtleGradientShift 25s ease infinite;
+    color: var(--text-primary);
+    line-height: 1.65;
+    padding-top: var(--header-height);
+    overflow-x: hidden; /* Prevent horizontal scroll from intense shadows */
+}
+
+/* Header */
+header.bg-dark.sticky-top {
+    background-color: rgba(13, 17, 23, 0.75); /* var(--bg-void) with alpha */
+    backdrop-filter: blur(12px) saturate(150%);
+    -webkit-backdrop-filter: blur(12px) saturate(150%);
+    border-bottom: 1px solid var(--border-subtle);
+    box-shadow: 0 4px 20px rgba(0,0,0,0.4);
+    height: var(--header-height);
+    z-index: 1000;
+}
+
+.logo {
+    height: 36px;
+    filter: drop-shadow(0 0 8px var(--accent-nebula-glow));
+    transition: transform var(--transition-medium);
+}
+.logo:hover {
+    transform: scale(1.05);
+}
+
+.logo-text {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 1.6rem;
+    color: var(--accent-nebula);
+    text-shadow: 0 0 10px var(--accent-nebula-glow);
+    letter-spacing: 0.8px;
+}
+
+.navbar-dark .navbar-nav .nav-link {
+    font-family: var(--font-monospace); /* Monospace for nav for "tech" feel */
+    font-weight: 500;
+    text-transform: uppercase;
+    font-size: 0.85rem;
+    color: var(--text-secondary) !important;
+    padding: 0.6rem 1rem;
+    border-radius: var(--border-radius-small);
+    transition: color var(--transition-fast), background-color var(--transition-fast), transform var(--transition-fast);
+    position: relative;
+}
+.navbar-dark .navbar-nav .nav-link:hover,
+.navbar-dark .navbar-nav .nav-link.active {
+    color: var(--text-high-contrast) !important;
+    background-color: var(--bg-interactive-hover);
+    transform: translateY(-2px);
+}
+.navbar-dark .navbar-nav .nav-link.active::before { /* More prominent active indicator */
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: 5px;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 6px;
+    background-color: var(--accent-nebula);
+    border-radius: 50%;
+    box-shadow: 0 0 8px var(--accent-nebula-glow);
+}
+
+/* Main Content Area */
+main.container {
+    padding-top: 2.5rem;
+    padding-bottom: 3rem;
+}
+
+/* News Section Titles */
+.category-title {
+    font-family: var(--font-primary);
+    font-weight: 700;
+    font-size: 2rem;
+    color: var(--text-high-contrast);
+    padding-bottom: 0.6rem;
+    border-bottom: 3px solid transparent; /* Prepare for gradient border */
+    border-image: linear-gradient(to right, var(--accent-nebula), rgba(0, 191, 255, 0.3));
+    border-image-slice: 1;
+    display: inline-block;
+    margin-bottom: 0.5rem;
+    text-shadow: 0 0 15px var(--accent-nebula-shadow);
+}
+
+/* "View All" Button */
+.news-category .btn.btn-outline-primary.btn-sm {
+    font-family: var(--font-monospace);
+    color: var(--accent-nebula);
+    border: 1px solid var(--accent-nebula);
+    font-weight: 500;
+    font-size: 0.85rem;
+    padding: 0.4rem 0.8rem;
+    border-radius: var(--border-radius-small);
+    transition: all var(--transition-fast);
+}
+.news-category .btn.btn-outline-primary.btn-sm:hover {
+    background-color: var(--accent-nebula);
+    color: var(--bg-abyss);
+    box-shadow: 0 0 15px var(--accent-nebula-glow);
+    transform: scale(1.05);
+}
+
+/* News Cards - More Immersive */
+.news-card.card.shadow-sm {
+    background-color: var(--bg-surface-raised);
+    border: 1px solid var(--border-interactive);
+    border-radius: var(--border-radius-main);
+    transition: transform var(--transition-medium), box-shadow var(--transition-medium), border-color var(--transition-medium);
+    overflow: hidden;
+    position: relative; /* For pseudo-elements if needed */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3), 0 0 0 transparent !important; /* Base shadow, prepare for glow */
+}
+
+.news-card.card:hover {
+    transform: translateY(-10px) scale(1.02); /* More lift */
+    border-color: var(--border-focus);
+    box-shadow: 0 15px 35px rgba(0,0,0,0.5), 0 0 30px var(--accent-nebula-shadow) !important;
+}
+
+.news-card-img {
+    width: 100%;
+    height: 220px; /* Taller images */
+    object-fit: cover;
+    transition: transform var(--transition-slow), filter var(--transition-medium);
+    filter: saturate(0.8) brightness(0.85); /* Slightly muted */
+    border-bottom: 1px solid var(--border-interactive);
+}
+.news-card.card:hover .news-card-img {
+    transform: scale(1.1); /* Zoom more */
+    filter: saturate(1.1) brightness(1);
+}
+
+.news-card .card-body {
+    padding: 1.25rem;
+    position: relative; /* For potential absolute positioned elements */
+    z-index: 2; /* Above any pseudo elements */
+}
+
+.news-card .news-card-text {
+    font-size: 0.95rem;
+    line-height: 1.6;
+    color: var(--text-primary); /* Brighter text for better contrast on dark */
+    min-height: 65px;
+    margin-bottom: 1.25rem;
+    transition: color var(--transition-fast);
+}
+.news-card.card:hover .news-card-text {
+    color: var(--text-high-contrast);
+}
+
+
+/* "READ MORE" Button */
+.news-card .btn.btn-primary.read-more-btn {
+    font-family: var(--font-monospace);
+    background: transparent;
+    border: 2px solid var(--accent-nebula);
+    color: var(--accent-nebula);
+    font-weight: 500;
+    font-size: 0.9rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    padding: 0.6rem 1.2rem;
+    border-radius: var(--border-radius-small);
+    transition: all var(--transition-fast);
+    position: relative;
+    overflow: hidden; /* For shine effect */
+    z-index: 1;
+}
+.news-card .btn.btn-primary.read-more-btn:hover {
+    background-color: var(--accent-nebula);
+    color: var(--bg-abyss);
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 0 20px var(--accent-nebula-glow);
+}
+/* Optional Shine effect for button */
+.news-card .btn.btn-primary.read-more-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(120deg, transparent, rgba(255,255,255,0.25), transparent);
+    transition: left var(--transition-medium);
+    z-index: -1;
+}
+.news-card .btn.btn-primary.read-more-btn:hover::before {
+    left: 100%;
+}
+.news-card .btn.btn-primary.read-more-btn::after {
+    content: " // LAUNCH"; /* More "techy" */
+    font-size: 0.8em;
+    opacity: 0.7;
+}
+
+
+/* Footer */
+footer.bg-dark.text-white.text-center {
+    background-color: var(--bg-abyss) !important; /* Deepest black */
+    border-top: 1px solid var(--border-subtle);
+    color: var(--text-secondary) !important;
+    padding: 2rem 0;
+    font-size: 0.9rem;
+}
+footer a.text-white-50:hover {
+    color: var(--accent-nebula) !important;
+    text-shadow: 0 0 5px var(--accent-nebula-glow);
+}
+
+/* Responsive adjustments as before, might need tweaking based on new sizes */
+@media (max-width: 991.98px) {
+    .logo-text { font-size: 1.4rem; }
+    .category-title { font-size: 1.7rem; }
+}
+@media (max-width: 767.98px) {
+    .logo { height: 30px; }
+    .logo-text { font-size: 1.3rem; }
+    .category-title { font-size: 1.5rem; }
+    .news-card-img { height: 180px; }
+}

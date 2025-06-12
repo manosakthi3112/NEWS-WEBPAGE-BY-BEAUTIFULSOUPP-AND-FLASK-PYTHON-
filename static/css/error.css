@@ -1,0 +1,207 @@
+/* Optional: Import a clean sans-serif and monospace if not relying on system defaults for sub-text */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Source+Code+Pro:wght@400;500;600&display=swap');
+
+:root {
+    /* Fonts from your HTML (Atma, Caveat, Coiny) */
+    --font-oops: 'Coiny', cursive;
+    --font-error-message: 'Source+Code+Pro', monospace;
+    --font-subtext: 'Roboto', sans-serif;
+
+    /* Immersive Dark Theme Colors */
+    --bg-deep-void: #020408; /* Even darker */
+    --bg-glitch-overlay: rgba(10,15,20,0.75);
+
+    --text-high-contrast: #e8eff6;
+    --text-error-primary: #ff3333; /* More intense red */
+    --text-error-secondary: #ff6666;
+    --text-glitch-cyan: #00ffff;
+    --text-glitch-magenta: #ff00ff;
+
+
+    --accent-primary-deep-purple: #9b59b6;
+    --accent-primary-glow: rgba(155, 89, 182, 0.25);
+
+    --transition-fast: 0.3s ease-out;
+}
+
+/* --- Keyframes for Animations --- */
+
+@keyframes pulseGlowEnhanced { /* Enhanced glow for ERROR */
+    0%, 100% {
+        text-shadow:
+            0 0 5px var(--text-error-secondary),
+            0 0 10px var(--text-error-primary),
+            0 0 15px var(--text-error-primary);
+        opacity: 0.8;
+    }
+    50% {
+        text-shadow:
+            0 0 10px var(--text-error-secondary),
+            0 0 20px var(--text-error-primary),
+            0 0 35px var(--text-error-primary),
+            0 0 50px var(--text-error-primary);
+        opacity: 1;
+    }
+}
+
+@keyframes subtleGridShift { /* Grid background movement */
+    0% { background-position: 0% 0%; }
+    100% { background-position: 2em 2em; } /* Shift by one grid unit */
+}
+
+@keyframes scanlines { /* Animated scanlines */
+    0% { background-position: 0 0; }
+    100% { background-position: 0 100%; }
+}
+
+@keyframes textGlitch { /* Main glitch effect for text */
+    0% {
+        text-shadow: 1px 0 0 var(--text-glitch-magenta), -1px 0 0 var(--text-glitch-cyan);
+        clip-path: inset(10% 0 80% 0); transform: translateY(-1px);
+    }
+    10%, 12%, 100% {
+        text-shadow: 1px 0 0 var(--text-glitch-magenta), -1px 0 0 var(--text-glitch-cyan);
+        clip-path: none; transform: translateY(0);
+    }
+    11% { /* Quick glitch */
+        text-shadow: -1px 0 0 var(--text-glitch-magenta), 1px 0 0 var(--text-glitch-cyan);
+        clip-path: inset(30% 0 30% 0); transform: translateY(2px);
+    }
+    /* Add more steps for varied glitching */
+    40% { text-shadow: 2px 0 0 var(--text-glitch-magenta), -2px 0 0 var(--text-glitch-cyan); transform: translateX(-1px); }
+    41% { text-shadow: -2px 0 0 var(--text-glitch-magenta), 2px 0 0 var(--text-glitch-cyan); transform: translateX(1px); }
+    42% { text-shadow: 1px 0 0 var(--text-glitch-magenta), -1px 0 0 var(--text-glitch-cyan); transform: translateX(0px); }
+
+    70% { text-shadow: 1px 1px 0 var(--text-glitch-magenta), -1px -1px 0 var(--text-glitch-cyan); transform: translate(-1px, 1px); }
+    71% { text-shadow: -1px -1px 0 var(--text-glitch-magenta), 1px 1px 0 var(--text-glitch-cyan); transform: translate(1px, -1px); }
+    72% { text-shadow: 0 0 0 transparent, 0 0 0 transparent; transform: translate(0,0); } /* Brief clear */
+}
+
+@keyframes float3D { /* Subtle floating/tilting for the main div */
+    0%, 100% { transform: translateZ(0) rotateX(2deg) rotateY(-2deg); }
+    50% { transform: translateZ(-5px) rotateX(-2deg) rotateY(2deg); }
+}
+
+@keyframes overallFlicker { /* Subtle flicker for the whole page or container */
+    0%, 100% { opacity: 0.95; }
+    50% { opacity: 0.9; }
+    25%, 75% { opacity: 1; }
+}
+
+
+/* --- Base Styles --- */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    font-family: var(--font-subtext);
+    perspective: 800px; /* Enable 3D transforms for children */
+}
+
+body {
+    background-color: var(--bg-deep-void);
+    background-image:
+        /* Scanlines */
+        repeating-linear-gradient(
+            0deg,
+            rgba(20, 30, 40, 0.1),
+            rgba(20, 30, 40, 0.1) 1px,
+            transparent 1px,
+            transparent 4px /* Adjust line thickness and spacing */
+        ),
+        /* Grid */
+        linear-gradient(var(--bg-glitch-overlay) 0.07em, transparent 0.07em),
+        linear-gradient(90deg, var(--bg-glitch-overlay) 0.07em, transparent 0.07em);
+    background-size: 100% 4px, 2.5em 2.5em; /* Scanlines take full width, grid size */
+    animation:
+        subtleGridShift 15s linear infinite, /* Slower grid shift */
+        scanlines 0.2s linear infinite,  /* Fast scanlines */
+        overallFlicker 3s infinite steps(1, end);
+    color: var(--text-high-contrast);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+}
+
+div { /* The main container */
+    padding: 2rem 1rem; /* Adjust padding */
+    max-width: 95%;
+    transform-style: preserve-3d; /* Needed for 3D children if any */
+    animation: float3D 12s infinite ease-in-out;
+    position: relative; /* For pseudo elements for text glitch if needed */
+}
+
+h1 {
+    margin: 0;
+    font-weight: normal;
+    line-height: 1.1; /* Tighter line height for large stacked text */
+    position: relative; /* For glitch pseudo-elements */
+}
+
+/* Styling "OOPS........" part */
+h1::before {
+    content: "OOPS........ ";
+    font-family: var(--font-oops);
+    font-size: clamp(3.5rem, 18vw, 10rem); /* Slightly larger */
+    color: var(--text-high-contrast);
+    display: block;
+    margin-bottom: 0.05em; /* Tighter margin */
+    position: relative; /* For stacking context / z-index if using overlays */
+    text-shadow: 0 0 10px var(--accent-primary-glow), 0 0 20px var(--accent-primary-glow);
+    animation: textGlitch 2.5s infinite steps(1, end) alternate; /* Apply glitch */
+}
+
+/* Styling "ERROR" part */
+h1::after {
+    content: "ERROR_";
+    font-family: var(--font-error-message);
+    font-size: clamp(3rem, 15vw, 8rem); /* Slightly larger */
+    color: var(--text-error-primary);
+    display: block;
+    letter-spacing: 0.08em; /* More spacing */
+    position: relative;
+    animation:
+        pulseGlowEnhanced 1.8s infinite ease-in-out, /* Enhanced glow */
+        textGlitch 3s infinite steps(1,start) alternate-reverse 0.2s; /* Apply glitch, different timing */
+}
+
+
+/* Optional: Add a small sub-text or a link back home */
+body > p.subtext-container { /* Change body::after to an actual element for better control */
+    position: absolute;
+    bottom: 1.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-subtext);
+    font-size: clamp(0.75rem, 1.8vw, 0.9rem); /* Slightly smaller */
+    color: var(--text-secondary);
+    max-width: 85%;
+    line-height: 1.4;
+    padding: 0.5rem;
+    background-color: rgba(0,0,0,0.3);
+    border-radius: 4px;
+    animation: fadeIn 2s ease-out 1s both; /* Delayed fade in */
+    opacity: 0.8;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translate(-50%, 10px); }
+    to { opacity: 0.8; transform: translate(-50%, 0); }
+}
+
+
+a.return-link { /* Style if you add an actual link */
+    color: var(--accent-primary-deep-purple);
+    text-decoration: none;
+    font-weight: 500;
+    border-bottom: 1px dashed var(--accent-primary-deep-purple);
+    transition: var(--transition-fast);
+}
+a.return-link:hover {
+    color: var(--text-high-contrast);
+    border-bottom-style: solid;
+    text-shadow: 0 0 8px var(--accent-primary-glow);
+}
