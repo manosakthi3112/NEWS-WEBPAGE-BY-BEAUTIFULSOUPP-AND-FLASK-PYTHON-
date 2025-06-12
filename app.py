@@ -10,23 +10,23 @@ app.secret_key = "3112"
 def index():
     try:
         f=scrap.tot()
-        print("s")
+        
         d=scrap.tamilnadu()
-        print("s")
+       
         cinema=scrap.cinema()
-        print("s")
+        
         lifestyle=scrap.lifestyle()
-        print("s")
+        
         sports=scrap.sports()
-        print("s")
+        
         business=scrap.business()
-        print("s")
+        
         india=scrap.india()
-        print("s")
+        
         world=scrap.world()
-        print("s")
+        
         spiritual=scrap.spiritual()
-        print("s")
+        
         #return  render_template('base.html',tamilnadu=d)
         return render_template('base.html',data=f,tamilnadu=d,cinema=cinema,lifestyle=lifestyle,sports=sports,business=business,india=india,world=world,spiritual=spiritual)
     except:
